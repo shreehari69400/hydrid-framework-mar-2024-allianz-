@@ -4,12 +4,12 @@ import org.testng.annotations.Test;
 
 public class LoginUITest {
 
-	@Test
+	@Test(invocationCount = 3)
 	public void titleTest() {
 		System.out.println("test");
 	}
 	
-	@Test
+	@Test (priority = 1)
 	public void applicationTest() {
 		System.out.println("apptest");
 	}
