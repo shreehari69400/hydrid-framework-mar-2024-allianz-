@@ -7,16 +7,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class LoginUITest {
+import com.allianz.base.AutomationWrapper;
 
+public class LoginUITest extends AutomationWrapper {
+	
 	@Test
 	public void titleTest() {
-		WebDriver driver=new ChromeDriver();
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-		driver.get("https://opensource-demo.orangehrmlive.com/web/index.php");
+		
 		String actualTitle=driver.getTitle();
 		Assert.assertEquals(actualTitle, "OrangeHRM");
 		
@@ -25,10 +27,7 @@ public class LoginUITest {
 	@Test 
 	public void applicationDescriptionTest() {
 		
-		WebDriver driver=new ChromeDriver();
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
-		driver.get("https://opensource-demo.orangehrmlive.com/web/index.php");
+		
 		
 		String actualText=driver.findElement(By.xpath("//p[contains(normalize-space(),'OS')]")).getText();
 		Assert.assertEquals(actualText, "OrangeHRM OS 5.6.1");
