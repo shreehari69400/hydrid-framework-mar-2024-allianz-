@@ -8,19 +8,19 @@ import com.allianz.base.AutomationWrapper;
 import com.allianz.utils.DataUtils;
 
 public class LoginTest extends AutomationWrapper{
-	@Test
-	public void validLoginTest ()
+	@Test(dataProvider = "commonDataProvider",dataProviderClass = DataUtils.class)
+	public void validLoginTest (String username,String password,String expectedHeader)
 	{
 		driver.findElement(By.name("username")).sendKeys("Admin");
 		driver.findElement(By.name("password")).sendKeys("admin123");
 		driver.findElement(By.xpath("//button[@class='oxd-button oxd-button--medium oxd-button--main orangehrm-login-button']")).click();
 		String actualText=driver.findElement(By.xpath("//h6[@class='oxd-text oxd-text--h6 oxd-topbar-header-breadcrumb-module']")).getText();
-		Assert.assertEquals(actualText, "Dashboard");
+		Assert.assertEquals(actualText,expectedHeader);
 		
 	}
 	
 	
-	@Test(dataProvider = "invalidLoginData",dataProviderClass = DataUtils.class)
+	@Test(dataProvider = "commonDataProvider",dataProviderClass = DataUtils.class)
 	public void invalidLoginTest (String username,String password,String expectedError)
 	{
 		driver.findElement(By.name("username")).sendKeys(username);
